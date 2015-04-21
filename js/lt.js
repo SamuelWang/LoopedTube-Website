@@ -39,7 +39,7 @@
         })) : c.text("\u7121\u8a18\u9304")
     }; a.startWatchCurrentTime = function () {
         var d = $("#time-interval"), b = $("#starttime", d), c = $("#endtime", d); this.startWatchCurrentTime.intervalId = setInterval(function () {
-            a.player.getCurrentTime() >
+            a.player.getCurrentTime() >=
             $.timeToSecond(c.val()) && a.player.seekTo($.timeToSecond(b.val()))
         }, 100)
     }; a.startWatchCurrentTime.intervalId = null; a.stopWatchCurrentTime = function () { clearInterval(this.startWatchCurrentTime.intervalId) }; a.showMessage = function (a, b) {

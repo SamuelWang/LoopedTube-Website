@@ -2,8 +2,8 @@
     loopedtube.player.addEventListener("onStateChange", function (a) {
         var c = a.data, b = $("#time-interval"); a = $("#starttime", b); b = $("#endtime", b); switch (c) {
             case YT.PlayerState.ENDED: loopedtube.isLoop ? (loopedtube.cued = !0, loopedtube.player.playVideo()) : loopedtube.stopWatchCurrentTime(); break; case YT.PlayerState.PLAYING: var c = loopedtube.player.getDuration(), d = $.timeToSecond(a.val()), e = $.timeToSecond(b.val()); loopedtube.cued && (a.removeAttr("disabled"), 0 < d && loopedtube.player.seekTo(d), c &&
-            0 === e && (loopedtube.currentVideo.duration = c, $("#endtime", "#time-interval").val($.secondToTime(c)), b.removeAttr("disabled")), loopedtube.cued = !1, loopedtube.startWatchCurrentTime(), loopedtube.addRecentVideo(loopedtube.currentVideo, function () { loopedtube.renderRecentVedioList() }), $("#playin").val(loopedtube.currentVideo.id)); break; case YT.PlayerState.PAUSED: loopedtube.stopWatchCurrentTime(); break; case YT.PlayerState.CUED: d = loopedtube.cuedVideo.startTime ? loopedtube.cuedVideo.startTime : 0, a.val($.secondToTime(d)),
-            b.val($.secondToTime(0)), a.attr("disabled", "disabled"), b.attr("disabled", "disabled"), loopedtube.currentVideo = loopedtube.cuedVideo, loopedtube.cued = !0, loopedtube.player.playVideo()
+            0 === e && (loopedtube.currentVideo.duration = c, $("#endtime", "#time-interval").val($.secondToTime(c)), b.removeAttr("disabled")), loopedtube.cued = !1, loopedtube.addRecentVideo(loopedtube.currentVideo, function () { loopedtube.renderRecentVedioList() }), $("#playin").val(loopedtube.currentVideo.id)); break; case YT.PlayerState.PAUSED: loopedtube.stopWatchCurrentTime(); break; case YT.PlayerState.CUED: d = loopedtube.cuedVideo.startTime ? loopedtube.cuedVideo.startTime : 0, a.val($.secondToTime(d)), b.val($.secondToTime(0)), a.attr("disabled",
+            "disabled"), b.attr("disabled", "disabled"), loopedtube.currentVideo = loopedtube.cuedVideo, loopedtube.cued = !0, loopedtube.player.playVideo()
         }
     }); loopedtube.player.addEventListener("onError", function (a) {
         switch (a.data) {

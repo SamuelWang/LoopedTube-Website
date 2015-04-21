@@ -39,16 +39,18 @@
         })) : c.text("\u7121\u8a18\u9304")
     }; a.startWatchCurrentTime = function () {
         var d = $("#time-interval"), b = $("#starttime", d), c = $("#endtime", d); this.startWatchCurrentTime.intervalId = setInterval(function () {
-            a.player.getCurrentTime() >=
-            $.timeToSecond(c.val()) && a.player.seekTo($.timeToSecond(b.val()))
+            var d =
+            $.timeToSecond(c.val()); a.player.getCurrentTime() >= d && d < a.player.currentVideo.duration && a.player.seekTo($.timeToSecond(b.val()))
         }, 100)
-    }; a.startWatchCurrentTime.intervalId = null; a.stopWatchCurrentTime = function () { clearInterval(this.startWatchCurrentTime.intervalId) }; a.showMessage = function (a, b) {
+    }; a.startWatchCurrentTime.intervalId = null; a.stopWatchCurrentTime = function () { clearInterval(this.startWatchCurrentTime.intervalId); this.startWatchCurrentTime.intervalId = null }; a.showMessage = function (a, b) {
         var c = $("#message-box"), e = $(".message", c), f = 6; if (a) {
-            clearTimeout(this.showMessage.timeout); e.html(a).removeClass("warning error"); switch (b) { case "warning": e.addClass("warning"); f = 12; break; case "error": e.addClass("error"), f = 18 } c.show(); this.showMessage.timeout = setTimeout(function () { c.hide() },
-            1E3 * f)
+            clearTimeout(this.showMessage.timeout); e.html(a).removeClass("warning error"); switch (b) {
+                case "warning": e.addClass("warning");
+                    f = 12; break; case "error": e.addClass("error"), f = 18
+            } c.show(); this.showMessage.timeout = setTimeout(function () { c.hide() }, 1E3 * f)
         } return this
     }; a.showMessage.timeout = null; a.parseVideoId = function (d) {
-        if (!d) return null; var b = new a.Video, c = /http[s]?\:\/\/www\.youtube\.com\/watch\?v\=([\w\-]{11})\&?.*/ig.exec(d), e = /http[s]?\:\/\/youtu\.be\/([\w\-]{11})(\?t\=([\w\d]+))?/ig.exec(d), f = /^<iframe\s{1}.*?https\:\/\/www\.youtube\.com\/embed\/([\w\-]{11})\??.*/ig.exec(d); f && f[1] ? b.id = f[1] : c && c[1] ? b.id = c[1] : e && e[1] ? (b.id = e[1], e[3] && (d = /((\d{1,2})h)?((\d{1,2})m)?((\d{1,2})s)?/ig.exec(e[3]), c = 0, d[2] && (c += 3600 * parseInt(d[2], 10)), d[4] &&
-        (c += 60 * parseInt(d[4], 10)), d[6] && (c += parseInt(d[6], 10)), 0 <= c && (b.startTime = c))) : 11 === d.length && (b.id = d); return b
+        if (!d) return null; var b = new a.Video, c = /http[s]?\:\/\/www\.youtube\.com\/watch\?v\=([\w\-]{11})\&?.*/ig.exec(d), e = /http[s]?\:\/\/youtu\.be\/([\w\-]{11})(\?t\=([\w\d]+))?/ig.exec(d), f = /^<iframe\s{1}.*?https\:\/\/www\.youtube\.com\/embed\/([\w\-]{11})\??.*/ig.exec(d); f && f[1] ? b.id = f[1] : c && c[1] ? b.id = c[1] : e && e[1] ? (b.id =
+        e[1], e[3] && (d = /((\d{1,2})h)?((\d{1,2})m)?((\d{1,2})s)?/ig.exec(e[3]), c = 0, d[2] && (c += 3600 * parseInt(d[2], 10)), d[4] && (c += 60 * parseInt(d[4], 10)), d[6] && (c += parseInt(d[6], 10)), 0 <= c && (b.startTime = c))) : 11 === d.length && (b.id = d); return b
     }; a.Video = function (d) { if (!(this instanceof a.Video)) return new a.Video(d); this.id = d ? d : null; this.thumbnail = this.title = null; this.endTime = this.startTime = this.duration = 0 }; a.Video.prototype = { videoId: function (a) { return a ? (this.id = this.parseVideoId(a), this) : this.id } }
 })(window);

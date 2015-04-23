@@ -4,7 +4,7 @@
             a.toggleButtonActive($(this), function () { var a = $("#playcontent"); a.show(); a.find("#playin").focus() },
             function () { $("#playcontent").hide() })
         }); $("#searchcontent", d).hide(); $("#playcontent", d).find("#playin").focus().on("keydown", function (a) { 13 === a.which && $(".fa-play", "#playcontent").trigger("click") }).end().find(".fa-play").on("click", function () {
-            var c = $(this).siblings("#playin"), b = a.parseVideoId(c.val()); b.id ? (a.getRecentVideoList().every(function (a) { return a.id === b.id ? (b = a, !1) : !0 }), b.id === a.currentVideo.id ? a.player.seekTo(a.currentVideo.startTime) : (a.cuedVideo = b, a.cueVideo()), $("#playcontent").hide(),
+            var c = $(this).siblings("#playin"), b = a.parseVideoId(c.val()); b.id ? (a.getRecentVideoList().every(function (a) { return a.id === b.id ? (b = a, !1) : !0 }), a.currentVideo && b.id === a.currentVideo.id ? a.player.seekTo(a.currentVideo.startTime) : (a.cuedVideo = b, a.cueVideo()), $("#playcontent").hide(),
             $("#add").removeClass("active")) : (window.alert("\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u5f71\u7247ID\u6216\u5f71\u7247\u7db2\u5740"), c.focus())
         }); $("#player-funcs", d).find(".fa-repeat").on("click", function () { a.toggleButtonActive($(this), function () { a.isLoop = !0 }, function () { a.isLoop = !1 }) }).end().find(".fa-arrows-h").on("click", function () { a.toggleButtonActive($(this), function () { $("#time-interval", d).show() }, function () { $("#time-interval", d).hide() }) }).end().find(".fa-music").on("click", function () {
             a.toggleButtonActive($(this),
